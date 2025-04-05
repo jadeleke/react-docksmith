@@ -98,13 +98,13 @@ Enter your Docker Hub credentials when prompted.
 ### 2. Tag the Image
 
 ```bash
-docker tag react-docksmith adeleke1/react-docksmith
+docker tag react-docksmith your_username/react-docksmith
 ```
 
 ### 3. Push to Docker Hub
 
 ```bash
-docker push adeleke1/react-docksmith
+docker push your_name/react-docksmith
 ```
 
 ---
