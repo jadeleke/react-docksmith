@@ -59,7 +59,7 @@ npm install
 npm start
 ```
 
-Then visit [http://localhost:80](http://localhost:80)
+Then visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
