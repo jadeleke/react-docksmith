@@ -1,4 +1,4 @@
-# react-docksmith
+# react-docksmith v1.1.0
 
 **react-docksmith** is a containerized React application built and maintained by me. This project demonstrates how to create a simple React app, containerize it with Docker, and deploy it using Nginx.
 
