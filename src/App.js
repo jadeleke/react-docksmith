@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react';
-import Chart from 'chart.js/auto';
+import React, { useEffect, useRef } from 'react';
+import Chart from 'chart.js';
 import './style.css';
+import visualation from './assets/visualation.png';
+import containerized from './assets/containerized.png';
+
 
 function App() {
+  const chartRef = useRef(null);
+
   useEffect(() => {
-    // Initialize the skills chart when the component mounts
-    const ctx = document.getElementById('skillsChart').getContext('2d');
-    new Chart(ctx, {
+    const ctx = chartRef.current.getContext('2d');
+    const chart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['Python', 'HTML/CSS', 'JavaScript', 'ML Frameworks', 'Bash Scripting', 'Git/GitHub'],
@@ -18,9 +22,18 @@ function App() {
         }]
       },
       options: {
-        scales: { y: { beginAtZero: true, max: 100 } }
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
       }
     });
+
+    return () => {
+      chart.destroy();
+    };
   }, []);
 
   return (
@@ -40,11 +53,11 @@ function App() {
 
       {/* Hero Section */}
       <section id="hero">
-        <img 
-          className="avatar" 
-          src="https://media.licdn.com/dms/image/v2/D4D03AQG4rldzNX-_RQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1676548625238?e=1748476800&v=beta&t=Oa3-Dw4yAkhOcYTMtpcVqCajB15xVHWI7S1P7vfavnM" 
-          alt="Joseph Adeleke Avatar" 
-          loading="lazy" 
+        <img
+          className="avatar"
+          src="https://media.licdn.com/dms/image/v2/D4D03AQG4rldzNX-_RQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1676548625238?e=1748476800&v=beta&t=Oa3-Dw4yAkhOcYTMtpcVqCajB15xVHWI7S1P7vfavnM"
+          alt="Joseph Adeleke Avatar"
+          loading="lazy"
         />
         <h1>Joseph Adeleke</h1>
         <p>DevOps Engineer | MSc Computer Science | ML, ASR &amp; NLP Enthusiast</p>
@@ -62,40 +75,38 @@ function App() {
       </section>
 
       {/* Projects Section */}
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <div class="project-card">
-        <img src="https://github.githubassets.com/assets/quickdraw-default--medium-dark-477cc984c57a.png" alt="Ghana Voice"/>
-        <div class="project-info">
-          <h3>GhanaVoice</h3>
-          <p>GhanaVoice is a speech classification system that uses Convolutional Neural Networks (CNNs) to identify spoken Ghanaian languages. The system is designed to classify speech samples into one of five languages: Akan, Ewe, Dagbani, Dagaare, and Ikposo.</p>
+      <section id="projects">
+        <h2>Projects</h2>
+        <div className="project-grid">
+          <div className="project-card">
+            <img src="https://github.githubassets.com/assets/quickdraw-default--medium-dark-477cc984c57a.png" alt="Ghana Voice" />
+            <div className="project-info">
+              <h3>GhanaVoice</h3>
+              <p>GhanaVoice is a speech classification system that uses Convolutional Neural Networks (CNNs) to identify spoken Ghanaian languages. The system is designed to classify speech samples into one of five languages: Akan, Ewe, Dagbani, Dagaare, and Ikposo.</p>
+            </div>
+          </div>
+          <div className="project-card">
+            <img src={containerized} alt="Containerize React App" />
+            <div className="project-info">
+              <h3>Containerize React App</h3>
+              <p>react-docksmith is a modern React portfolio application showcasing a complete DevOps workflow—developing with React, containerizing with Docker, and deploying via Nginx. It features a multi-stage Docker build, local development setup, and push-to-Docker-Hub support for seamless deployment.</p>
+            </div>
+          </div>
+          <div className="project-card">
+            <img src={visualation} alt="Advanced Iris Visualization" />
+            <div className="project-info">
+              <h3>advanced-iris-visualization</h3>
+              <p>This project employs advanced visualization techniques on the Iris dataset to reveal distribution patterns and uncertainties using violin, box, bar, and KDE plots. It transforms complex statistical data into clear, actionable insights for both experts and general audiences.</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="project-card">
-        <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-9e10-51f7-b30c-d8dddfe6ff53/raw?se=2025-04-06T09%3A56%3A51Z&sp=r&sv=2024-08-04&sr=b&scid=6f66f097-1480-5fa8-8f4d-e6a9bc06518c&skoid=dfdaf859-26f6-4fed-affc-1befb5ac1ac2&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-06T07%3A08%3A28Z&ske=2025-04-07T07%3A08%3A28Z&sks=b&skv=2024-08-04&sig=I88/%2B8QURsf1Hd8TL6KFxwcAhYr0GLeeCftCHGkwNEc%3D" alt="Containerize React App"/>
-        <div class="project-info">
-          <h3>Containerize React App</h3>
-          <p>react-docksmith is a modern React portfolio application showcasing a complete DevOps workflow—developing with React, containerizing with Docker, and deploying via Nginx. It features a multi-stage Docker build, local development setup, and push-to-Docker-Hub support for seamless deployment.
-          </p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="https://sdmntpreastus2.oaiusercontent.com/files/00000000-3d30-51f6-9cd6-b6aef72990af/raw?se=2025-04-06T09%3A43%3A24Z&sp=r&sv=2024-08-04&sr=b&scid=a2d619bc-cb43-5e19-a4cf-32dff438cbe0&skoid=dfdaf859-26f6-4fed-affc-1befb5ac1ac2&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-06T07%3A06%3A32Z&ske=2025-04-07T07%3A06%3A32Z&sks=b&skv=2024-08-04&sig=b8OXmXG%2BJiY7JUia31ZsXvGnbspO6/jdazhk8/Op%2BGw%3D" alt="Advanced Iris Visualization"/>
-        <div class="project-info">
-          <h3>advanced-iris-visualization</h3>
-          <p>This project employs advanced visualization techniques on the Iris dataset to reveal distribution patterns and uncertainties using violin, box, bar, and KDE plots. It transforms complex statistical data into clear, actionable insights for both experts and general audiences.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
       {/* Skills Section */}
       <section id="skills">
         <h2>Skills</h2>
         <div className="chart-container">
-          <canvas id="skillsChart"></canvas>
+          <canvas ref={chartRef}></canvas>
         </div>
       </section>
 
